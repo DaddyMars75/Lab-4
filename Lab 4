@@ -1,0 +1,111 @@
+#include <iostream>
+
+using namespace std;
+
+// Starting setup
+void fillArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        arr[i] = i + 1;
+    }
+}
+
+// Task 1: O(1)
+int directAccess(int arr[], int size) {
+    int counter = 0;
+
+    // Access one known position
+    int middle = arr[size / 2];
+    counter++;
+
+    return counter;
+}
+
+// Task 2: O(n)
+int oneLoop(int arr[], int size) {
+    int counter = 0;
+
+    for (int i = 0; i < size; i++) {
+        int value = arr[i];
+        counter++;
+    }
+
+    return counter;
+}
+
+// Task 3: O(log n)
+int divideBy2(int n) {
+    int counter = 0;
+
+    while (n > 1) {
+        n = n / 2;
+        counter++;
+    }
+
+    return counter;
+}
+
+// Task 4: O(n log n)
+int insideLoopD2(int n) {
+    int counter = 0;
+
+    for (int i = 0; i < n; i++) {
+
+        int temp = n;
+
+        while (temp > 1) {
+            temp = temp / 2;
+            counter++;
+        }
+    }
+
+    return counter;
+}
+
+// Task 5: O(n^2)
+int nestedLoop(int n) {
+    int counter = 0;
+
+    for (int i = 0; i < n; i++) {
+
+        for (int j = 0; j < n; j++) {
+            counter++;
+        }
+    }
+
+    return counter;
+}
+
+int main() {
+
+    int sizes[] = {10, 100, 500, 2000};
+
+    for (int n : sizes) {
+
+        int* arr = new int[n];
+
+        fillArray(arr, n);
+
+        cout << "n = " << n << endl;
+
+        cout << "directAccess: "
+             << directAccess(arr, n) << endl;
+
+        cout << "oneLoop: "
+             << oneLoop(arr, n) << endl;
+
+        cout << "divideBy2: "
+             << divideBy2(n) << endl;
+
+        cout << "insideLoopD2: "
+             << insideLoopD2(n) << endl;
+
+        cout << "nestedLoop: "
+             << nestedLoop(n) << endl;
+
+        cout << endl;
+
+        delete[] arr;
+    }
+
+    return 0;
+}
